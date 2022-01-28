@@ -7,13 +7,15 @@ import App from '../App';
 describe('Teste o componente <App.js />', () => {
   it('o topo da aplicação contém um conjunto fixo de links de navegação', () => {
     renderWithRouter(<App />);
-    const linkToHome = screen.getByRole('link', { name: /Home/i });
-    const linkToAbout = screen.getByRole('link', { name: /About/i });
-    const linkToFavorites = screen.getByRole('link', { name: /Favorite Pokémons/i });
+    const linkToHome = screen.getByRole('link', { name: /Home/i }).innerHTML;
+    const linkToAbout = screen.getByRole('link', { name: /About/i }).innerHTML;
+    const linkToFavorites = screen.getByRole('link', {
+      name: /Favorite Pokémons/i,
+    }).innerHTML;
 
-    expect(linkToHome).toBeInTheDocument();
-    expect(linkToAbout).toBeInTheDocument();
-    expect(linkToFavorites).toBeInTheDocument();
+    expect(linkToHome).toBe('Home');
+    expect(linkToAbout).toBe('About');
+    expect(linkToFavorites).toBe('Favorite Pokémons');
   });
 
   it('é redirecionada para a URL /, ao clicar no link Home', () => {
@@ -59,7 +61,7 @@ describe('Teste o componente <App.js />', () => {
       name: /Page requested not found/i,
       level: 2,
     });
-    
+
     expect(title).toBeInTheDocument();
   });
 });
